@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Een lijst is alleen bereikbaar met de code uit de link (minstens 20 tekens).
+    // Er is geen regel voor /lists zelf, dus niemand kan opvragen welke lijsten er bestaan.
+    match /lists/{code}/items/{item} {
+      allow read, write: if code.size() >= 20;
+    }
+    match /lists/{code}/meta/{doc} {
+      allow read, write: if code.size() >= 20;
+    }
+  }
+}
