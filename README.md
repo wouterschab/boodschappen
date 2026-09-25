@@ -32,6 +32,24 @@ Open de app. Er komt dan een lange code achter de link (`…/#k3j9…`): dat is 
 lijst. Tik op **Deel link** en stuur die complete link naar de ander. Zet hem daarna
 allebei op je beginscherm (Safari: Deel → Zet op beginscherm).
 
+### Wat er bij het inrichten misging (25-09-2026)
+
+Het project is `boodschappen-ws-7lum3`, het Firebase-abonnement is Spark (gratis). De
+regels zet je opnieuw neer met `npx firebase-tools deploy --only firestore:rules`.
+
+- `firebase projects:create` maakte wel het Google Cloud-project aan, maar het
+  koppelen van Firebase gaf `403 The caller does not have permission`. Het lag niet
+  aan de voorwaarden: die kwamen in de console niet eens in beeld. Nadat de console
+  één keer was geopend, werkte `projects:addfirebase` bij de volgende poging wel.
+- Met `firestore:databases:create` lukte het niet (`Cloud Firestore API has not been
+  used`). Rules deployen zet die API niet aan. De database is daarom via de console
+  aangemaakt (Firestore → Create database).
+- De console vroeg om een betaald abonnement zodra het Database-ID iets anders was dan
+  `(default)`. Alleen `(default)` valt binnen het gratis quotum, en de app gebruikt
+  ook alleen die.
+- Na een push duurt het ongeveer een minuut voordat GitHub Pages de nieuwe versie
+  serveert. Daarna kan een browser nog de oude versie uit de cache tonen.
+
 ## Hoe het sorteren werkt
 
 Er zit geen AI in. `index.html` bevat per pad een lijst trefwoorden. Voor een nieuw
